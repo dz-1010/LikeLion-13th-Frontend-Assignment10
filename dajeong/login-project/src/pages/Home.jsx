@@ -15,10 +15,7 @@ export default function Home() {
       {!isLoggedIn && <LoginForm />}
       {isLoggedIn && <p className="home-text">로그인 완료!</p>}
       {isLoggedIn && (
-        <button
-          className="home-change-button"
-          onClick={() => navigate("/password")}
-        >
+        <button className="change-button" onClick={() => navigate("/password")}>
           비밀번호 변경
         </button>
       )}

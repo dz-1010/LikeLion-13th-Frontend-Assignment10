@@ -1,5 +1,3 @@
-App.css
-
 .nav{
   display:flex; gap:16px; padding:16px; justify-content:center;
   border-bottom:1px solid #eee; background:#f8f9fa;

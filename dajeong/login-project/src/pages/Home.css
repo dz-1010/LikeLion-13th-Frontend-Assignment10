@@ -9,7 +9,7 @@ body{ margin:0; }
 .home-text{ margin:0; font-size:16px; color:#444; }
 
 /* 비밀번호 변경 버튼 */
-.home-change-button {
+.change-button {
   display: block;
   background-color: #333;
   color: #fff;
