@@ -1,5 +1,3 @@
-
-
 body{ margin:0; }
 
 .home-page{
@@ -11,9 +9,8 @@ body{ margin:0; }
 .home-text{ margin:0; font-size:16px; color:#444; }
 
 /* 비밀번호 변경 버튼 */
-.change-button {
+.home-change-button {
   display: block;
-  width: 300px;
   background-color: #333;
   color: #fff;
   border-radius: 8px;
