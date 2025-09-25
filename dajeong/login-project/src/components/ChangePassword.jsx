@@ -1,39 +1,19 @@
 import { useState } from "react";
+import { useAuthStore } from "../stores/authStore";
 import "./ChangePassword.css";
 
 export default function ChangePassword() {
   const [nowPassword, setNowPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
-  const [pwdConfirm, setPwdConfirm] = useState("");
-  const [error, setError] = useState("");
-  const [success, setSuccess] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
 
-  const onSubmit = (e) => {
+  const changePassword = useAuthStore((s) => s.changePassword);
+  const isChangePassword = useAuthStore((s) => s.isChangePassword);
+  const error = useAuthStore((s) => s.error);
+
+  const onSubmit = async (e) => {
     e.preventDefault();
-    setError("");
-    setSuccess("");
-
-    if (newPassword.length < 6) {
-      setError("비밀번호는 최소 6자 이상이어야 합니다.");
-      return;
-    }
-    if (!/\d/.test(newPassword)) {
-      setError("비밀번호에는 최소 한 개의 숫자가 포함되어야 합니다.");
-      return;
-    }
-    if (newPassword !== pwdConfirm) {
-      setError("비밀번호가 일치하지 않습니다.");
-      return;
-    }
-    if (newPassword === nowPassword) {
-      setError("현재 비밀번호와 다른 비밀번호를 사용해야 합니다.");
-      return;
-    }
-
-    setSuccess("비밀번호가 변경되었습니다.");
-    setNowPassword("");
-    setNewPassword("");
-    setPwdConfirm("");
+    await changePassword(nowPassword, newPassword, confirmPassword);
   };
   return (
     <div className="change-wrap">
@@ -57,13 +37,15 @@ export default function ChangePassword() {
         <input
           placeholder="새 비밀번호 확인"
           type="password"
-          value={pwdConfirm}
-          onChange={(e) => setPwdConfirm(e.target.value)}
+          value={confirmPassword}
+          onChange={(e) => setConfirmPassword(e.target.value)}
           className="password-input"
         />
 
         {error && <p className="login-error">{error}</p>}
-        {success && <p className="success-message">{success}</p>}
+        {isChangePassword && (
+          <p className="success-message">비밀번호가 변경되었습니다.</p>
+        )}
 
         <button type="submit" className="change-button">
           변경하기
